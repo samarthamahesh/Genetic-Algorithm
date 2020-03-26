@@ -14,9 +14,9 @@ def mate(parent1, parent2):
     child_chromosome = np.empty(ARRAY_SIZE)
     for i in range(ARRAY_SIZE):
         num = random.random()
-        if num < 0.40:
+        if num < 0.45:
             child_chromosome[i] = parent1[i]
-        elif num < 0.80:
+        elif num < 0.90:
             child_chromosome[i] = parent2[i]
         else:
             child_chromosome[i] = mutated_genes()
@@ -42,10 +42,9 @@ if __name__ == "__main__":
     found = False
     rounds = 0
 
-    while(found == False):
+    while found == False:
         population.sort(key=lambda x: x.fitness)
 
-        sum = 0
         print("ROUND: ", rounds)
         for i in range(POPULATION_SIZE):
             print(population[i].fitness)
@@ -64,8 +63,8 @@ if __name__ == "__main__":
 
         s = POPULATION_SIZE - s
         for i in range(s):
-            par1 = random.randint(0, POPULATION_SIZE//4)
-            par2 = random.randint(0, POPULATION_SIZE//4)
+            par1 = random.randint(0, POPULATION_SIZE//2)
+            par2 = random.randint(0, POPULATION_SIZE//2)
             new_generation.append(mate(population[par1].chromosome, population[par2].chromosome))
 
         population = new_generation
