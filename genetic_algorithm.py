@@ -5,8 +5,6 @@ from client_moodle import *
 ARRAY_SIZE = 11
 POPULATION_SIZE = 10
 
-print(ARRAY_SIZE)
-
 def mutated_genes():
     return random.uniform(-10, 10)
 
@@ -36,14 +34,14 @@ if __name__ == "__main__":
 
     population.append(Individual(arr))
 
-    for i in range(POPULATION_SIZE):
+    for i in range(POPULATION_SIZE-1):
         population.append(Individual(list(np.random.uniform(-10, 10, ARRAY_SIZE))))
 
     found = False
     rounds = 0
 
     while found == False:
-        population.sort(key=lambda x: x.fitness)
+        population.sort(key=lambda x: x.fitness[1])
 
         print("ROUND: ", rounds)
         for i in range(POPULATION_SIZE):
