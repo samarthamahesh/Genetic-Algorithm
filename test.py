@@ -1,6 +1,6 @@
 from client_moodle import *
 
-input_file = open('test2.txt', 'r')
+input_file = open('best.txt', 'r')
 arr = input_file.read()
 arr = json.loads(arr)
 
