@@ -4,17 +4,15 @@ from client_moodle import *
 
 ARRAY_SIZE = 11
 POPULATION_SIZE = 50
-RANGES = [[-10, 10], [-10, 10], [-0.075, -0.075], [-0.075, 0.075], [-6*1e-08, 6*1e-08], [-6*1e-08, 6*1e-08], [-1e-14, 1e-14], [-1e-14, 1e-14], [-1e-14, 1e-14], [-1e-13, 1e-13], [-1e-13, 1e-13]]
 
 # Function for performing mutation
 def mutation(chromosome):
-    # for i in range(ARRAY_SIZE):
-    Mutation_position = random.randint(0,10)
-    # prob = random.random()
-    #     if prob < 0.1:
-    lo,hi = RANGES[Mutation_position][0],RANGES[Mutation_position][1]
-    mut_change = random.uniform(lo,hi)
-    chromosome[Mutation_position] = mut_change
+    for i in range(ARRAY_SIZE):
+        # Mutation_position = random.randint(0,10)
+        prob = random.random()
+        if prob < 0.3:
+            mul = random.uniform(-1, 1)
+            chromosome[i] *= mul
     
     # g = random.uniform(-1,1)
     # return x + g
@@ -22,17 +20,12 @@ def mutation(chromosome):
 # Function for mating between parents to produce offspring
 def mate(parent1, parent2):
     child_chromosome = np.empty(ARRAY_SIZE)
-    point = random.randint(1, 9)
-    for i in range(point):
+    crossover_point = random.randint(1,9)
+    for i in range(crossover_point):
         child_chromosome[i] = parent1[i]
-    for i in range(point, ARRAY_SIZE):
-        child_chromosome[i] = parent2[i]
-    # for i in range(ARRAY_SIZE):
-    #     prob = random.random()
-    #     if prob < 0.5:
-    #         child_chromosome[i] = parent1[i]
-    #     else:
-    #         child_chromosome[i] = parent2[i]
+    for j in range(crossover_point+1,11):
+        child_chromosome[j] = parent2[j]
+        
     mutation(child_chromosome)
     return Individual(list(child_chromosome))
 
@@ -47,12 +40,18 @@ if __name__ == "__main__":
     population = []
 
     # Create initial individual
+    # for i in range(POPULATION_SIZE):
+    #     arr = []
+    #     for j in range(ARRAY_SIZE):
+    #         tmp = random.uniform(RANGES[j][0], RANGES[j][1])
+    #         arr.append(tmp)
+    #     population.append(Individual(arr))
+    f = open('overfit.txt', 'r')
+    arr = f.read()
+    arr = json.loads(arr)
+    obj = Individual(arr)
     for i in range(POPULATION_SIZE):
-        arr = []
-        for j in range(ARRAY_SIZE):
-            tmp = random.uniform(RANGES[j][0], RANGES[j][1])
-            arr.append(tmp)
-        population.append(Individual(arr))
+        population.append(obj)
 
     # f = open('out.txt', 'r')
     # arr = f.read()
@@ -73,8 +72,8 @@ if __name__ == "__main__":
         for i in range(POPULATION_SIZE):
             print(population[i].fitness)
             print(population[i].chromosome)
-            f1.write(str(population[i].fitness)+"\n")
-            f1.write(str(population[i].chromosome)+"\n")
+            f1.write(str(population[i].fitness))
+            f1.write(str(population[i].chromosome))
         print()
 
         # After required number of generations, break the algo
