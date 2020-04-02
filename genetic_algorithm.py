@@ -6,21 +6,27 @@ ARRAY_SIZE = 11
 POPULATION_SIZE = 200
 RANGES = [[9.9, 10], [-5.2, -5.1], [-6.45, -6.4], [0.064, 0.065], [0.03, 0.04], [9.73e-05, 9.74e-05], [-6.1e-05, -6e-05], [-1.28e-07, -1.27e-07], [3.4e-08, 3.5e-08], [3.6e-11, 3.7e-11], [-6.7e-12, -6.8e-12]]
 
-# Function for returning mutated genes
-def mutated_genes(x):
-    return random.uniform(-10, 10)
+# Function for performing mutation
+def mutation(chromosome):
+    
+    Mutation_position = random.randint(0,10)
+    lo,hi = RANGES[Mutation_position][0],RANGES[Mutation_position][1]
+    mut_change = random.uniform(lo,hi)
+    chromosome[Mutation_position] = mut_change
+    
+    # g = random.uniform(-1,1)
+    # return x + g
 
 # Function for mating between parents to produce offspring
 def mate(parent1, parent2):
     child_chromosome = np.empty(ARRAY_SIZE)
     for i in range(ARRAY_SIZE):
         prob = random.random()
-        if prob < 0.45:
+        if prob < 0.5:
             child_chromosome[i] = parent1[i]
-        elif prob < 0.9:
-            child_chromosome[i] = parent2[i]
         else:
-            child_chromosome[i] = mutated_genes(i)
+            child_chromosome[i] = parent2[i]
+    mutation(child_chromosome)
     return Individual(list(child_chromosome))
 
 # Class for an individual
