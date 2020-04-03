@@ -92,14 +92,21 @@ if __name__ == "__main__":
         # Rest 90% comes from mating between the parents with rare mutations with low probability
         trace_file.write("\nRest 90% Inviduals come from crossing\n")
         s *= 9
-        for i in range(s):
+        i = 0
+        while i < s:
             par1 = random.randint(0, POPULATION_SIZE//10)
             par2 = random.randint(0, POPULATION_SIZE//10)
+
+            if par1 == par2:
+                i -= 1
+                continue
             
             trace_file.write("\nOffspring " + str(i+1) + "\n")
             trace_file.write("Parent 1 (" + str(par1+1) + ") -> " + str(population[par1].chromosome) + " Errors -> " + str(population[par1].fitness) + " Fitness -> " + str(population[par1].fitness[0] + population[par1].fitness[1]) + "\n")
             trace_file.write("Parent 2 (" + str(par2+1) + ") -> " + str(population[par2].chromosome) + " Errors -> " + str(population[par2].fitness) + " Fitness -> " + str(population[par2].fitness[0] + population[par2].fitness[1]) + "\n")
             new_generation.append(mate(population[par1].chromosome, population[par2].chromosome))
+
+            i += 1
 
         population = new_generation
         trace_file.write("\nNew generation : \n")
