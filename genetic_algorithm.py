@@ -3,8 +3,8 @@ import random
 from client_moodle import *
 
 ARRAY_SIZE = 11
-POPULATION_SIZE = 50
-RANGES = [[-10, 10], [-10, 10], [-0.075, -0.075], [-0.075, 0.075], [-6*1e-08, 6*1e-08], [-6*1e-08, 6*1e-08], [-1e-14, 1e-14], [-1e-14, 1e-14], [-1e-14, 1e-14], [-1e-13, 1e-13], [-1e-13, 1e-13]]
+POPULATION_SIZE = 30
+RANGES = [[-10, 10], [-10, 10], [-0.06, -0.06], [-0.06, 0.06], [-5*1e-08, 5*1e-08], [-5*1e-08, 5*1e-08], [-1e-14, 1e-14], [-1e-14, 1e-14], [-1e-14, 1e-14], [-1e-13, 1e-13], [-1e-13, 1e-13]]
 
 # Function for performing mutation
 def mutation(chromosome):
