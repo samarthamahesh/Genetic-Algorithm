@@ -97,8 +97,8 @@ if __name__ == "__main__":
             par2 = random.randint(0, POPULATION_SIZE//10)
             
             trace_file.write("\nOffspring " + str(i+1) + "\n")
-            trace_file.write("Parent 1 -> " + str(population[par1].chromosome) + " Errors -> " + str(population[par1].fitness) + " Fitness -> " + str(population[par1].fitness[0] + population[par1].fitness[1]) + "\n")
-            trace_file.write("Parent 2 -> " + str(population[par2].chromosome) + " Errors -> " + str(population[par2].fitness) + " Fitness -> " + str(population[par2].fitness[0] + population[par2].fitness[1]) + "\n")
+            trace_file.write("Parent 1 (" + str(par1+1) + ") -> " + str(population[par1].chromosome) + " Errors -> " + str(population[par1].fitness) + " Fitness -> " + str(population[par1].fitness[0] + population[par1].fitness[1]) + "\n")
+            trace_file.write("Parent 2 (" + str(par2+1) + ") -> " + str(population[par2].chromosome) + " Errors -> " + str(population[par2].fitness) + " Fitness -> " + str(population[par2].fitness[0] + population[par2].fitness[1]) + "\n")
             new_generation.append(mate(population[par1].chromosome, population[par2].chromosome))
 
         population = new_generation
