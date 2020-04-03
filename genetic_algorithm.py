@@ -98,7 +98,6 @@ if __name__ == "__main__":
             par2 = random.randint(0, POPULATION_SIZE//10)
 
             if par1 == par2:
-                i -= 1
                 continue
             
             trace_file.write("\nOffspring " + str(i+1) + "\n")
